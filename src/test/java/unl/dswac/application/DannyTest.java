@@ -31,13 +31,18 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import unl.dswac.application.controller.ClienteController;
 import unl.dswac.application.model.Cliente;
 import unl.dswac.application.model.repository.ClienteRepository;
+import unl.dswac.application.service.ClienteService;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @AutoConfigureMockMvc
 // @ActiveProfiles("test")
-public class ClienteTest {
+public class DannyTest {
     @InjectMocks
     private ClienteController clienteController;
+    
+    @Mock
+    private ClienteService clienteService;
+    
     //@Mock
     //private LibroWS librows;
     @Mock
@@ -59,21 +64,21 @@ public class ClienteTest {
 
     }
 
-    /*@Test
+    @Test
     public void listarTodos() throws Exception {
 
-        when(libroRepository.findAll()).thenReturn(lista());
-        libroController.listar();
-        verify(libroRepository).findAll();
+        when(clienteRepository.findAll()).thenReturn(lista());
+        clienteRepository.findAll();
+        verify(clienteRepository).findAll();
 
-    }*/
+    }
 
     @Test
     public void guardar() throws Exception {
 
         Cliente cliente = new Cliente();
         //LibroWS libroWS = new LibroWS();
-        cliente.setIdentificacion("test");
+        cliente.setIdentificacion("test2");
         cliente.setNombres("nombre 1");
         cliente.setApellidos("apellido 1");
         cliente.setTelefono("test");
@@ -82,40 +87,36 @@ public class ClienteTest {
 
         //when(librows.cargarDatos(ArgumentMatchers.any(Libro.class))).thenReturn(libro);
 
-        //when(libroRepository.count()).thenReturn(2l);
-        clienteController.guardarCliente(cliente);
+        
+        when(clienteController.guardarCliente(cliente)).thenReturn(cliente);        
+        clienteController.guardarCliente(cliente);       
 
+        when(clienteRepository.count()).thenReturn(10l);
+        
+        clienteRepository.count();
+        
         verify(clienteRepository).count();
 
     }
 
-    /**private List<Libro> lista() {
-        List<Libro> lista = new ArrayList<>();
-        Libro l = new Libro();
-        l.setTitulo("java");
-        l.setAutores("test 1");
-        l.setCodigo("00001");
-        l.setExternal_id("1");
-        l.setCreateAt(new Date());
-        l.setUpdateAt(new Date());
-        l.setEdision("test");
-        l.setEditorial("test");
-        l.setAnio(2022);
-        l.setIsbn("test");
+    private List<Cliente> lista() {
+        List<Cliente> lista = new ArrayList<>();
+        Cliente l = new Cliente();
+        l.setIdentificacion("test1");
+        l.setNombres("nombre 1");
+        l.setApellidos("apellido 1");
+        l.setTelefono("test");
+        l.setCorreo("cooreo1@unl.edu.ec");
         lista.add(l);
-        Libro l1 = new Libro();
-        l1.setTitulo("java 2");
-        l1.setAutores("test 2");
-        l1.setCodigo("00002");
-        l1.setExternal_id("2");
-        l1.setCreateAt(new Date());
-        l1.setUpdateAt(new Date());
-        l1.setEdision("test");
-        l1.setEditorial("test");
-        l1.setAnio(2022);
-        l1.setIsbn("test");
+        
+        Cliente l1 = new Cliente();
+        l1.setIdentificacion("test2");
+        l1.setNombres("nombre 2");
+        l1.setApellidos("apellido 2");
+        l1.setTelefono("test2");
+        l1.setCorreo("cooreo2@unl.edu.ec");
         lista.add(l1);
 
         return lista;
-    }*/
+    }
 }
