@@ -26,7 +26,7 @@ public class ClienteController {
         
         @GetMapping("/pin")
         public String hola() {
-            return "hola";
+            return "Pin OK";
         }
 
 	@GetMapping("/all")

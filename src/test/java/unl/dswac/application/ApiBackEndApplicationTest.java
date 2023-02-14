@@ -51,7 +51,7 @@ public class ApiBackEndApplicationTest {
 	private ObjectMapper objectMapper;
         
         @Test
-    public void listar() throws Exception {
+    public void pin() throws Exception {
 
         mockMvc.perform(
                 MockMvcRequestBuilders.get("/cliente/pin")
